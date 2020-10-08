@@ -41,6 +41,5 @@ public class Davaleba {
         for (int i = 0; i < pos; i++) {
             System.out.println(class3[i]);
         }
-
     }
 }
