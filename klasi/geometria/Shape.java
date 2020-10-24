@@ -13,12 +13,14 @@ public class Shape {
 
     // ეს ფუნქცია ეკრანზე ხატავს ფიგურას
     public void draw(double x, double y) {
+        System.out.println("ეკრანზე დაიხატა ფიგურა");
         // TODO დასამთავრებელია
 
     }
 
     // ეს ფუნქცია შლის დახატულ ფიგურას
     public void delete() {
+        System.out.println("წაიშალა ფიგურა");
         // TODO დასამთავრებელია
     }
 
