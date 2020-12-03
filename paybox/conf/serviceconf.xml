@@ -1,0 +1,26 @@
+<services>
+    <service>
+        <name>თელასი</name>
+        <description>თბილისის ელექტრომომარაგება</description>
+        <logo>./image/telasi.jpg</logo>
+        <verifyUrl>https://google.com</verifyUrl>
+        <paymentUrl>https://google.com</paymentUrl>
+        <category>
+            <name>კომუნალური</name>
+            <description>კომუნალური გადახდები</description>
+            <logo>./image/comunal.jpg</logo>
+        </category>
+    </service>
+    <service>
+        <name>მაგთი</name>
+        <description>მობილური ოპერატორი მაგთიკომი</description>
+        <logo>./image/magti.jpg</logo>
+        <verifyUrl>https://google.com</verifyUrl>
+        <paymentUrl>https://google.com</paymentUrl>
+        <category>
+            <name>მობილური კავშირი</name>
+            <description>მობილური კავშირები</description>
+            <logo>./image/mobile.jpg</logo>
+        </category>
+    </service>
+</services>
