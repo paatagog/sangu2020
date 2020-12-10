@@ -4,6 +4,7 @@ public class Service {
     private String name, description;
     private ServiceCategory category;
     private String logo;
+    private boolean state;
 
     private String verificationUrl;
     private String paymentUrl;
@@ -54,5 +55,13 @@ public class Service {
 
     public void setPaymentUrl(String paymentUrl) {
         this.paymentUrl = paymentUrl;
+    }
+
+    public boolean isState() {
+        return state;
+    }
+
+    public void setState(boolean state) {
+        this.state = state;
     }
 }

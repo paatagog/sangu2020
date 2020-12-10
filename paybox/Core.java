@@ -1,17 +1,25 @@
 package paybox;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import paybox.devices.CardReader;
 import paybox.devices.CoinAcceptor;
 import paybox.devices.Printer;
 import paybox.services.Service;
 import paybox.services.ServiceCategory;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Core {
 
     private static final String PAYBOX_CONF_FILE = "paybox.xml";
-    private static final String SERVICE_CONF_FILE = "serviceconf.xml";
+    private static final String SERVICE_CONF_FILE = "c:\\Users\\amigo\\IdeaProjects\\sangu2020\\paybox\\conf\\serviceconf.xml";
 
     private String id, address, supportNumber;
 
@@ -19,15 +27,16 @@ public class Core {
     private CardReader cardReader;
     private Printer printer;
 
-    private List<Service> services;
+    private List<Service> services = new ArrayList<>();
 
     private Service selectedService = null;
     private ServiceCategory selectedServiceCategory = null;
 
     private boolean needsShutDown = false;
 
-    public void init() {
-        // TODO
+    private boolean disabled = false;
+
+    public void init() throws PayBoxException {
         loadPayBoxConf(PAYBOX_CONF_FILE);
         loadServices(SERVICE_CONF_FILE);
 
@@ -38,17 +47,67 @@ public class Core {
         printer.init();
         coinAcceptor.init();
         cardReader.init();
-
-
-
     }
 
-    public void loadPayBoxConf(String fileName) {
-        // TODO ამ ფუნქციამ კონფიგურაციის ფაილიდან უნდა წაიკითხოს ფეიბოქსის პარამეტრები
+    public void loadPayBoxConf(String fileName) throws PayBoxException{
+        try {
+            File conf = new File(fileName);
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(conf);
+            doc.getDocumentElement().normalize();
+
+            id = doc.getDocumentElement().getElementsByTagName("id").item(0).getTextContent();
+            address = doc.getDocumentElement().getElementsByTagName("address").item(0).getTextContent();
+            supportNumber = doc.getDocumentElement().getElementsByTagName("supportnumber").item(0).getTextContent();
+        } catch (Exception ex) {
+            System.out.println("მოხდა კონფიგურაციის წაკითხვის შეცდომა");
+            ex.printStackTrace();
+            Logger.log("მოხდა კონფიგურაციის წაკითხვის შეცდომა");
+            throw new PayBoxException();
+        }
     }
 
-    public void loadServices(String fileName) {
-        // TODO ამ ფუნქციამ კონფიგურაციის ფაილიდან უნდა წაიკითხოს სერვისები
+    public void loadServices(String fileName) throws PayBoxException {
+        try {
+            File conf = new File(fileName);
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(conf);
+            doc.getDocumentElement().normalize();
+
+            NodeList serviceNodes = doc.getDocumentElement().getElementsByTagName("service");
+            for (int i = 0; i < serviceNodes.getLength(); i++) {
+                Node serviceNode = serviceNodes.item(i);
+                if (serviceNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element sElement = (Element) serviceNode;
+
+                    Service s = new Service();
+                    s.setState("enabled".equals(sElement.getAttribute("state")));
+                    s.setName(sElement.getElementsByTagName("name").item(0).getTextContent());
+                    s.setDescription(sElement.getElementsByTagName("description").item(0).getTextContent());
+                    s.setLogo(sElement.getElementsByTagName("logo").item(0).getTextContent());
+                    s.setPaymentUrl(sElement.getElementsByTagName("paymentUrl").item(0).getTextContent());
+                    s.setVerificationUrl(sElement.getElementsByTagName("verifyUrl").item(0).getTextContent());
+
+                    Node scNode = sElement.getElementsByTagName("category").item(0);
+                    Element scElement = (Element) scNode;
+                    ServiceCategory sc = new ServiceCategory();
+                    sc.setName(scElement.getElementsByTagName("name").item(0).getTextContent());
+                    sc.setDescription(scElement.getElementsByTagName("description").item(0).getTextContent());
+                    sc.setLogo(scElement.getElementsByTagName("logo").item(0).getTextContent());
+
+                    s.setCategory(sc);
+
+                    services.add(s);
+                }
+            }
+        } catch (Exception ex) {
+            System.out.println("მოხდა სერვისერბის წაკითხვის შეცდომა");
+            ex.printStackTrace();
+            Logger.log("მოხდა სერვისერბის წაკითხვის შეცდომა");
+            throw new PayBoxException();
+        }
     }
 
     public void shutDown() {
@@ -123,5 +182,17 @@ public class Core {
 
     public void setSupportNumber(String supportNumber) {
         this.supportNumber = supportNumber;
+    }
+
+    public boolean isDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
+    }
+
+    public void showMessage(String message) {
+        // TODO დასამთავრებელია
     }
 }

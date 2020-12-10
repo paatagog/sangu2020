@@ -1,5 +1,5 @@
 <services>
-    <service>
+    <service state="disabled">
         <name>თელასი</name>
         <description>თბილისის ელექტრომომარაგება</description>
         <logo>./image/telasi.jpg</logo>
@@ -11,7 +11,7 @@
             <logo>./image/comunal.jpg</logo>
         </category>
     </service>
-    <service>
+    <service state="enabled">
         <name>მაგთი</name>
         <description>მობილური ოპერატორი მაგთიკომი</description>
         <logo>./image/magti.jpg</logo>
