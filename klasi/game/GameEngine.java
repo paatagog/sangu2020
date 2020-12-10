@@ -1,4 +1,6 @@
-package klasi.geometria;
+package klasi.game;
+
+import klasi.game.gameEngine.Shape;
 
 /**
  * ეს კლასი განკუთვნილია თამაშების ბირთვის დასაწერად.

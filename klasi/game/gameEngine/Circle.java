@@ -1,4 +1,4 @@
-package klasi.geometria;
+package klasi.game.gameEngine;
 
 /**
  * ეს არის წერეწირის შესაბამისი კლასი.

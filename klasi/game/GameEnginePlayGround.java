@@ -1,4 +1,8 @@
-package klasi.geometria;
+package klasi.game;
+
+import klasi.game.gameEngine.Circle;
+import klasi.game.gameEngine.Ellipse;
+import klasi.game.gameEngine.Shape;
 
 /**
  * ეს კლასი GameEngine-ს გამოსაცდელად არის განკუთვნილი.
@@ -20,6 +24,7 @@ public class GameEnginePlayGround {
         gameEngine.draw(circle, -98.12, 111.3);
         gameEngine.draw(ellipse, 45.32, 34.6);
 
+        // მშობელი ტიპის ობიექტს შეიძლება შვილობილი ტიპის ობიექტი მივანიჭოთ
         shape = circle;
         gameEngine.draw(shape, 643, 31);
 
