@@ -2,7 +2,7 @@ package shecdomebi;
 
 import java.util.Comparator;
 
-public class StudentComarator implements Comparator<Student> {
+public class StudentComparator implements Comparator<Student> {
     @Override
     public int compare(Student s1, Student s2) {
         if (s1.getAge() == s2.getAge()) {
