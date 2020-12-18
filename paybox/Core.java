@@ -7,6 +7,7 @@ import org.w3c.dom.NodeList;
 import paybox.devices.CardReader;
 import paybox.devices.CoinAcceptor;
 import paybox.devices.Printer;
+import paybox.gui.Gui;
 import paybox.services.Service;
 import paybox.services.ServiceCategory;
 
@@ -18,14 +19,17 @@ import java.util.List;
 
 public class Core {
 
-    private static final String PAYBOX_CONF_FILE = "paybox.xml";
+    private static final String PAYBOX_CONF_FILE = "c:\\Users\\amigo\\IdeaProjects\\sangu2020\\paybox\\conf\\paybox.xml";
     private static final String SERVICE_CONF_FILE = "c:\\Users\\amigo\\IdeaProjects\\sangu2020\\paybox\\conf\\serviceconf.xml";
 
     private String id, address, supportNumber;
+    private int screenWidth, screenHeight;
 
     private CoinAcceptor coinAcceptor;
     private CardReader cardReader;
     private Printer printer;
+
+    private Gui gui = new Gui();
 
     private List<Service> services = new ArrayList<>();
 
@@ -33,11 +37,13 @@ public class Core {
     private ServiceCategory selectedServiceCategory = null;
 
     private boolean needsShutDown = false;
-
     private boolean disabled = false;
 
     public void init() throws PayBoxException {
         loadPayBoxConf(PAYBOX_CONF_FILE);
+
+        gui.init(this);
+
         loadServices(SERVICE_CONF_FILE);
 
         printer = new Printer();
@@ -60,6 +66,8 @@ public class Core {
             id = doc.getDocumentElement().getElementsByTagName("id").item(0).getTextContent();
             address = doc.getDocumentElement().getElementsByTagName("address").item(0).getTextContent();
             supportNumber = doc.getDocumentElement().getElementsByTagName("supportnumber").item(0).getTextContent();
+            screenWidth = Integer.parseInt(doc.getDocumentElement().getElementsByTagName("screen_width").item(0).getTextContent());
+            screenHeight = Integer.parseInt(doc.getDocumentElement().getElementsByTagName("screen_height").item(0).getTextContent());
         } catch (Exception ex) {
             System.out.println("მოხდა კონფიგურაციის წაკითხვის შეცდომა");
             ex.printStackTrace();
@@ -115,7 +123,9 @@ public class Core {
     }
 
     public void showHomeScreen() {
-        // TODO დასამთავრებელია
+        gui.showHomeScreen();
+        // TODO ეს შემდეგი სტრიქონი არის წასაშლელი
+        gui.showService(services.get(0));
     }
 
     public boolean needsShutDown() {
@@ -160,6 +170,10 @@ public class Core {
         this.needsShutDown = needsShutDown;
     }
 
+    public void payService() {
+
+    }
+
     public String getId() {
         return id;
     }
@@ -194,5 +208,13 @@ public class Core {
 
     public void showMessage(String message) {
         // TODO დასამთავრებელია
+    }
+
+    public int getScreenWidth() {
+        return screenWidth;
+    }
+
+    public int getScreenHeight() {
+        return screenHeight;
     }
 }

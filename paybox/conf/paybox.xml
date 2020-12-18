@@ -1,5 +1,7 @@
 <paybox>
     <id>1</id>
-    <address>საცდელი მისამართი</address>
+    <address>ნუცუბიძის 1</address>
     <supportnumber>599-123456</supportnumber>
+    <screen_width>1920</screen_width>
+    <screen_height>1080</screen_height>
 </paybox>

@@ -2,7 +2,7 @@
     <service state="disabled">
         <name>თელასი</name>
         <description>თბილისის ელექტრომომარაგება</description>
-        <logo>./image/telasi.jpg</logo>
+        <logo>c:\Users\amigo\IdeaProjects\sangu2020\paybox\conf\services\images\telasi\logo.png</logo>
         <verifyUrl>https://google.com</verifyUrl>
         <paymentUrl>https://google.com</paymentUrl>
         <category>
