@@ -27,7 +27,7 @@ class CoreTest {
 //        assertEquals("599-123456", core.getSupportNumber());
     }
 
-//    @Test
+//  @Test
     void loadServices() {
     }
 

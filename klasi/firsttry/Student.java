@@ -1,4 +1,4 @@
-package klasi;
+package klasi.firsttry;
 
 /**
  * დღეს ვისწავლეთ კასების გამოყენება
