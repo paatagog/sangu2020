@@ -7,6 +7,7 @@ public class Printer {
     private boolean enabled = false;
     public void init() {
         // TODO დასამთავრებელია
+        // throw new PayBoxException("Printer", "მოხდა პრინტერის შეცდომა" + "ქაღალდი არის დამთვრებული");
 
         enabled = true;
     }

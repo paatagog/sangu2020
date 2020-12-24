@@ -7,10 +7,11 @@ public class PayBoxApp {
         try {
             core.init();
         } catch (PayBoxException pbe) {
+            String text = pbe.getType() + ": " + pbe.getMessage();
             core.setDisabled(true);
-            System.out.println("ვერ მოხერხდა აპარატის ჩატვირთვა");
+            System.out.println(text);
             pbe.printStackTrace();
-            Logger.log("ვერ მოხერხდა აპარატის ჩატვირთვა");
+            Logger.log(text);
         }
         if (core.isDisabled()) {
             core.showMessage("აპარატი დროებით არ მუშაობს");

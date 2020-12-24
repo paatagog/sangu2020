@@ -25,9 +25,9 @@ public class Core {
     private String id, address, supportNumber;
     private int screenWidth, screenHeight;
 
-    private CoinAcceptor coinAcceptor;
-    private CardReader cardReader;
-    private Printer printer;
+    private CoinAcceptor coinAcceptor = new CoinAcceptor();
+    private CardReader cardReader = new CardReader();
+    private Printer printer = new Printer();
 
     private Gui gui = new Gui();
 
@@ -41,15 +41,8 @@ public class Core {
 
     public void init() throws PayBoxException {
         loadPayBoxConf(PAYBOX_CONF_FILE);
-
         gui.init(this);
-
         loadServices(SERVICE_CONF_FILE);
-
-        printer = new Printer();
-        coinAcceptor = new CoinAcceptor();
-        cardReader = new CardReader();
-
         printer.init();
         coinAcceptor.init();
         cardReader.init();
@@ -69,10 +62,7 @@ public class Core {
             screenWidth = Integer.parseInt(doc.getDocumentElement().getElementsByTagName("screen_width").item(0).getTextContent());
             screenHeight = Integer.parseInt(doc.getDocumentElement().getElementsByTagName("screen_height").item(0).getTextContent());
         } catch (Exception ex) {
-            System.out.println("მოხდა კონფიგურაციის წაკითხვის შეცდომა");
-            ex.printStackTrace();
-            Logger.log("მოხდა კონფიგურაციის წაკითხვის შეცდომა");
-            throw new PayBoxException();
+            throw new PayBoxException("confFile", "მოხდა კონფიგურაციის ფაილის წაკითხვის შეცდომა");
         }
     }
 
@@ -111,10 +101,7 @@ public class Core {
                 }
             }
         } catch (Exception ex) {
-            System.out.println("მოხდა სერვისერბის წაკითხვის შეცდომა");
-            ex.printStackTrace();
-            Logger.log("მოხდა სერვისერბის წაკითხვის შეცდომა");
-            throw new PayBoxException();
+            throw new PayBoxException("serviceFile", "მოხდა სერვისების ფაილის წაკითხვის შეცდომა");
         }
     }
 

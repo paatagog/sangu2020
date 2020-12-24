@@ -9,6 +9,7 @@ public class CoinAcceptor {
     private boolean enabled = false;
     public void init() throws PayBoxException {
         // TODO დასამთავრებელია
+        // throw new PayBoxException("CoinAcceptor", "მოხდა ხურდის მიმღების შეცდომა: " + "გაჭედილია ხურდის მიმეღბი");
 
         enabled = true;
     }
