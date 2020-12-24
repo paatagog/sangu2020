@@ -8,6 +8,10 @@ public class PayBoxException extends Exception {
         this.type = type;
     }
 
+    public String getText() {
+        return this.type + this.getMessage();
+    }
+
     public String getType() {
         return type;
     }
