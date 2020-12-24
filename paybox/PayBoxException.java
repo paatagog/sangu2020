@@ -3,10 +3,6 @@ package paybox;
 public class PayBoxException extends Exception {
     private String type;
 
-    public PayBoxException() {
-
-    }
-
     public PayBoxException (String type, String errorMessage) {
         super(errorMessage);
         this.type = type;

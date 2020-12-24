@@ -25,13 +25,13 @@ public class Core {
     private String id, address, supportNumber;
     private int screenWidth, screenHeight;
 
-    private CoinAcceptor coinAcceptor = new CoinAcceptor();
-    private CardReader cardReader = new CardReader();
-    private Printer printer = new Printer();
+    private final CoinAcceptor coinAcceptor = new CoinAcceptor();
+    private final CardReader cardReader = new CardReader();
+    private final Printer printer = new Printer();
 
-    private Gui gui = new Gui();
+    private final Gui gui = new Gui();
 
-    private List<Service> services = new ArrayList<>();
+    private final List<Service> services = new ArrayList<>();
 
     private Service selectedService = null;
     private ServiceCategory selectedServiceCategory = null;
